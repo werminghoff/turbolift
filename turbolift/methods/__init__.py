@@ -69,11 +69,11 @@ class BaseMethod(object):
 
         cdn_enabled = self.job_args.get('cdn_enabled')
         if cdn_enabled:
-            headers['x-cdn-enabled'] = 'True'
+            headers['X-CDN-Enabled'] = 'True'
 
         cdn_disabled = self.job_args.get('cdn_disabled')
         if cdn_disabled:
-            headers['x-cdn-enabled'] = 'False'
+            headers['X-CDN-Enabled'] = 'False'
 
         cdn_logs_enabled = self.job_args.get('cdn_logs_enabled')
         if cdn_logs_enabled:
@@ -110,6 +110,7 @@ class BaseMethod(object):
         headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
 
         LOG.info(headers)
+        LOG.info(self.job_args)
 
         return self.job.container_cdn_command(
             url=self.job_args['cdn_storage_url'],
