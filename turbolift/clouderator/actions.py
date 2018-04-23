@@ -282,6 +282,18 @@ class CloudActions(object):
         self._resp_exception(resp=resp)
         return resp
 
+    @cloud_utils.retry(Exception)
+    def _header_putter(self, uri, headers):
+        """PUT Headers on a specified object in the container.
+
+        :param uri: ``str``
+        :param headers: ``dict``
+        """
+
+        resp = self.http.put(url=uri, body=None, headers=headers)
+        self._resp_exception(resp=resp)
+        return resp
+
     @staticmethod
     def _last_marker(base_path, last_object):
         """Set Marker.
@@ -520,7 +532,7 @@ class CloudActions(object):
             object_headers=object_headers,
         )
 
-        return self._header_poster(
+        return self._header_putter(
             uri=container_uri,
             headers=headers
         )
