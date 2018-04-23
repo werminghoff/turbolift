@@ -1,3 +1,6 @@
+================================================
+*Important:* this is a customized version of the original Turbolift. Some functionality has been removed because I'm not going to use it and was in my way of fixing some issues. Do not use this is you expect full functionality. This should NOT be merged into the original (cloudnull's) repo !
+================================================
 Turbolift, the Cloud Files Uploader
 ###################################
 :date: 2013-09-05 09:51
@@ -28,7 +31,7 @@ Functions of the Application :
   * Upload a single file
   * Upload a local directory (recursively) and sync it with a Cloud Files Container
   * Download a Container to a local directory
-  * Download changed objects from a Container to a local directory 
+  * Download changed objects from a Container to a local directory
   * Compresses a Local Directory, then uploads it
   * List all Containers
   * List all Objects in a Container
@@ -94,7 +97,7 @@ Systems Tested on
 
 The application has been tested on :
   * Debian 6
-  * Ubuntu 10.04 - 12.04 
+  * Ubuntu 10.04 - 12.04
   * Mac OS X 10.8
   * CentOS[RHEL] 6
 
