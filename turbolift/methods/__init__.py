@@ -65,59 +65,40 @@ class BaseMethod(object):
         :return final_list, list_count, last_obj:
         """
 
-        headers = dict()
+        cdn_headers = dict()
+        storage_headers = dict()
 
-        cdn_enabled = self.job_args.get('cdn_enabled')
+        cdn_enabled = self.job_args.get('cdn_enabled') # PUT @ CDN
         if cdn_enabled:
-            headers['X-CDN-Enabled'] = 'True'
+            cdn_headers['X-CDN-Enabled'] = 'True'
 
-        cdn_disabled = self.job_args.get('cdn_disabled')
+        cdn_disabled = self.job_args.get('cdn_disabled') # PUT @ CDN
         if cdn_disabled:
-            headers['X-CDN-Enabled'] = 'False'
+            cdn_headers['X-CDN-Enabled'] = 'False'
 
-        cdn_logs_enabled = self.job_args.get('cdn_logs_enabled')
-        if cdn_logs_enabled:
-            headers['x-log-retention'] = 'True'
-
-        cdn_logs_disabled = self.job_args.get('cdn_logs_disabled')
-        if cdn_logs_disabled:
-            headers['x-log-retention'] = 'False'
-
-        cnd_web_listing_enabled = self.job_args.get('cdn_web_enabled')
-        if cnd_web_listing_enabled:
-            headers['x-container-meta-web-listings'] = 'True'
-
-        cnd_web_listing_disabled = self.job_args.get('cdn_web_disabled')
-        if cnd_web_listing_disabled:
-            headers['x-container-meta-web-listings'] = 'False'
-
-        cdn_web_error_content = self.job_args.get('cdn_web_error_content')
+        cdn_web_error_content = self.job_args.get('cdn_web_error_content') # POST storage
         if cdn_web_error_content:
-            headers['x-container-meta-web-error'] = cdn_web_error_content
+            storage_headers['X-Container-Meta-Web-Error'] = cdn_web_error_content
 
-        cdn_web_dir_type = self.job_args.get('cdn_web_dir_type')
-        if cdn_web_dir_type:
-            headers['x-container-meta-web-directory-type'] = cdn_web_dir_type
-
-        cdn_web_css_object = self.job_args.get('cdn_web_css_object')
-        if cdn_web_css_object:
-            headers['x-container-meta-web-listings-css'] = cdn_web_css_object
-
-        cdn_web_index_object = self.job_args.get('cdn_web_index_object')
+        cdn_web_index_object = self.job_args.get('cdn_web_index_object') # POST storage
         if cdn_web_index_object:
-            headers['X-Container-Meta-Web-Index'] = cdn_web_index_object
+            storage_headers['X-Container-Meta-Web-Index'] = cdn_web_index_object
 
-        headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
+        if cdn_headers:
+            return self.job.container_cdn_put_command(
+                url=self.job_args['cdn_storage_url'],
+                container=self.job_args['container'],
+                container_object=self.job_args['object'],
+                cdn_headers=cdn_headers
+            )
 
-        LOG.info(headers)
-        LOG.info(self.job_args)
-
-        return self.job.container_cdn_command(
-            url=self.job_args['cdn_storage_url'],
-            container=self.job_args['container'],
-            container_object=self.job_args['object'],
-            cdn_headers=headers
-        )
+        if storage_headers:
+            return self.job.container_cdn_post_command(
+                url=self.job_args['storage_url'],
+                container=self.job_args['container'],
+                container_object=self.job_args['object'],
+                cdn_headers=storage_headers
+            )
 
     def mkdir(self, path):
         self.shell.mkdir_p(path=path)

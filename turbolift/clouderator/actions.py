@@ -526,7 +526,7 @@ class CloudActions(object):
         )
 
     @cloud_utils.retry(exceptions.SystemProblem)
-    def container_cdn_command(self, url, container, container_object,
+    def container_cdn_post_command(self, url, container, container_object,
                               cdn_headers):
         """Command your CDN enabled Container.
 
@@ -551,6 +551,27 @@ class CloudActions(object):
                 uri=container_uri,
                 headers=headers
             )
+
+    @cloud_utils.retry(exceptions.SystemProblem)
+    def container_cdn_put_command(self, url, container, container_object,
+                              cdn_headers):
+        """Command your CDN enabled Container.
+
+        :param url:
+        :param container:
+        """
+
+        headers, container_uri = self._return_base_data(
+            url=url,
+            container=container,
+            container_object=container_object,
+            object_headers=cdn_headers
+        )
+
+        return self._header_poster(
+            uri=container_uri,
+            headers=headers
+        )
 
     @cloud_utils.retry(exceptions.SystemProblem)
     def put_container(self, url, container, container_headers=None):
