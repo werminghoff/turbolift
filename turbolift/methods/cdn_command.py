@@ -29,4 +29,5 @@ class CdnRunMethod(methods.BaseMethod):
         with indicator.Spinner(run=self.run_indicator):
             cdn_item = self._cdn()
 
+        LOG.info(cdn_item.url)
         self.print_virt_table(cdn_item.headers)
