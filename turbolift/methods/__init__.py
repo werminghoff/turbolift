@@ -96,7 +96,7 @@ class BaseMethod(object):
             headers['x-container-meta-web-error'] = cdn_web_error_content
 
         cdn_web_dir_type = self.job_args.get('cdn_web_dir_type')
-        if cdn_web_error_content:
+        if cdn_web_dir_type:
             headers['x-container-meta-web-directory-type'] = cdn_web_dir_type
 
         cdn_web_css_object = self.job_args.get('cdn_web_css_object')
@@ -104,7 +104,7 @@ class BaseMethod(object):
             headers['x-container-meta-web-listings-css'] = cdn_web_css_object
 
         cdn_web_index_object = self.job_args.get('cdn_web_index_object')
-        if cdn_web_css_object:
+        if cdn_web_index_object:
             headers['X-Container-Meta-Web-Index'] = cdn_web_index_object
 
         headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
