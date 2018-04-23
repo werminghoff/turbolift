@@ -107,7 +107,7 @@ class BaseMethod(object):
         if cdn_web_css_object:
             headers['X-Container-Meta-Web-Index'] = cdn_web_index_object
 
-        headers['x-ttl'] = self.job_args.get('cdn_ttl')
+        headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
 
         return self.job.container_cdn_command(
             url=self.job_args['cdn_storage_url'],
