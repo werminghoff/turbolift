@@ -532,7 +532,7 @@ class CloudActions(object):
             object_headers=object_headers,
         )
 
-        return self._header_putter(
+        return self._header_poster(
             uri=container_uri,
             headers=headers
         )
@@ -580,7 +580,7 @@ class CloudActions(object):
             object_headers=cdn_headers
         )
 
-        return self._header_poster(
+        return self._header_putter(
             uri=container_uri,
             headers=headers
         )
