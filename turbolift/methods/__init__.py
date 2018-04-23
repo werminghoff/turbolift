@@ -87,7 +87,7 @@ class BaseMethod(object):
         if cdn_headers:
             print('')
             print('Will run container_cdn_put_command')
-            print('cdn_storage_url = ' + self.job_args['cdn_storage_url'])
+            print('cdn_storage_url = ' + self.job_args['cdn_storage_url']['scheme'] + self.job_args['cdn_storage_url']['netloc'] + self.job_args['cdn_storage_url']['path'])
             print('container = ' + self.job_args['container'])
             print('object = ' + self.job_args['object'])
             print('')
@@ -101,7 +101,7 @@ class BaseMethod(object):
         if storage_headers:
             print('')
             print('Will run container_cdn_post_command')
-            print('storage_url = ' + self.job_args['storage_url'])
+            print('storage_url = ' + self.job_args['storage_url'].scheme + self.job_args['storage_url'].netloc + self.job_args['storage_url'].path)
             print('container = ' + self.job_args['container'])
             print('object = ' + self.job_args['object'])
             print('')
