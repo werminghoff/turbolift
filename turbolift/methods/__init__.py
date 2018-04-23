@@ -69,27 +69,27 @@ class BaseMethod(object):
 
         cdn_enabled = self.job_args.get('cdn_enabled')
         if cdn_enabled:
-            headers['x-cdn-enabled'] = 'true'
+            headers['x-cdn-enabled'] = 'True'
 
         cdn_disabled = self.job_args.get('cdn_disabled')
         if cdn_disabled:
-            headers['x-cdn-enabled'] = 'false'
+            headers['x-cdn-enabled'] = 'False'
 
         cdn_logs_enabled = self.job_args.get('cdn_logs_enabled')
         if cdn_logs_enabled:
-            headers['x-log-retention'] = 'true'
+            headers['x-log-retention'] = 'True'
 
         cdn_logs_disabled = self.job_args.get('cdn_logs_disabled')
         if cdn_logs_disabled:
-            headers['x-log-retention'] = 'false'
+            headers['x-log-retention'] = 'False'
 
         cnd_web_listing_enabled = self.job_args.get('cdn_web_enabled')
         if cnd_web_listing_enabled:
-            headers['x-container-meta-web-listings'] = 'true'
+            headers['x-container-meta-web-listings'] = 'True'
 
         cnd_web_listing_disabled = self.job_args.get('cdn_web_disabled')
         if cnd_web_listing_disabled:
-            headers['x-container-meta-web-listings'] = 'false'
+            headers['x-container-meta-web-listings'] = 'False'
 
         cdn_web_error_content = self.job_args.get('cdn_web_error_content')
         if cdn_web_error_content:
@@ -107,7 +107,7 @@ class BaseMethod(object):
         if cdn_web_css_object:
             headers['X-Container-Meta-Web-Index'] = cdn_web_index_object
 
-        headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
+        #headers['x-ttl'] = str(self.job_args.get('cdn_ttl'))
 
         return self.job.container_cdn_command(
             url=self.job_args['cdn_storage_url'],
